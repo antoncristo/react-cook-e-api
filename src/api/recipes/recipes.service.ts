@@ -93,7 +93,7 @@ let recipes: Recipe[] = [
 ];
 
 class RecipesService implements RecipesServiceApi {
-	getRecipes(params: GetRecipeParams): Promise<Recipe[]> {
+	getRecipes = (params: GetRecipeParams): Promise<Recipe[]> => {
 		let res: Recipe[] = recipes;
 
 		if (params.search) {
@@ -105,7 +105,12 @@ class RecipesService implements RecipesServiceApi {
 		}
 
 		return Promise.resolve(res);
-	}
+	};
+
+	postRecipe = (recipePayload: Recipe): Promise<Recipe> => {
+		recipes.push(recipePayload);
+		return Promise.resolve(recipePayload);
+	};
 }
 
 export const recipesService = new RecipesService();

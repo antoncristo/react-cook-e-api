@@ -109,7 +109,14 @@ class RecipesService implements RecipesServiceApi {
 
 	postRecipe = (recipePayload: Recipe): Promise<Recipe> => {
 		recipes.push(recipePayload);
+
 		return Promise.resolve(recipePayload);
+	};
+
+	deleteRecipe = (recipeToDelete: UUID): Promise<UUID> => {
+		recipes = recipes.filter(r => r.id !== recipeToDelete);
+
+		return Promise.resolve(recipeToDelete);
 	};
 }
 

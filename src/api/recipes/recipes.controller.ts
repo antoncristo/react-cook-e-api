@@ -24,3 +24,14 @@ export const postRecipe: RequestHandler = async (req, res, next) => {
 		return next(err);
 	}
 };
+
+export const deleteRecipe: RequestHandler = async (req, res, next) => {
+	try {
+		const recipeIDToDelete = req.params.recipeid as UUID;
+		const success = await recipesService.deleteRecipe(recipeIDToDelete);
+
+		res.send({ deleted: success });
+	} catch (err) {
+		return next(err);
+	}
+};

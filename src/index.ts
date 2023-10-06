@@ -17,7 +17,7 @@ app.use('/api', appRouter);
 
 // not found/bad request/error handling section
 app.use('*', (req, res) => {
-	res.status(500).send();
+	res.status(400).send();
 });
 
 app.listen(SERVER_PORT, '0.0.0.0', () =>

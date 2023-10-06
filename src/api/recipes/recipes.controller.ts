@@ -35,3 +35,15 @@ export const deleteRecipe: RequestHandler = async (req, res, next) => {
 		return next(err);
 	}
 };
+
+export const putRecipe: RequestHandler = async (req, res, next) => {
+	try {
+		const updatedRecipe = req.body.updatedRecipe as Recipe;
+		console.log('here', updatedRecipe);
+		const success = await recipesService.putRecipe(updatedRecipe);
+
+		res.send({ updated: success });
+	} catch (err) {
+		return next(err);
+	}
+};

@@ -1,6 +1,7 @@
 import { RecipesServiceApi, GetRecipeParams } from './recipes.contract';
 import { Recipe } from './recipes.type';
 
+const UNDEFINED_INDEX = -1;
 let recipes: Recipe[] = [];
 
 class RecipesService implements RecipesServiceApi {
@@ -31,7 +32,7 @@ class RecipesService implements RecipesServiceApi {
 	};
 
 	putRecipe = (updatedRecipe: Recipe): Promise<Recipe> => {
-		let indexToUpdate = 0;
+		let indexToUpdate = UNDEFINED_INDEX;
 		let updateRef = recipes.find((r, i) => {
 			if (r.id === updatedRecipe.id) {
 				indexToUpdate = i;
@@ -39,7 +40,7 @@ class RecipesService implements RecipesServiceApi {
 			}
 		});
 
-		if (indexToUpdate) {
+		if (indexToUpdate !== UNDEFINED_INDEX) {
 			updateRef = JSON.parse(JSON.stringify({ ...updateRef, ...updatedRecipe }));
 			recipes[indexToUpdate] = updateRef!;
 

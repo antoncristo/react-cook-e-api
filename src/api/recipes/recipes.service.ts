@@ -1,3 +1,4 @@
+import { cookErrorBuilder } from 'errors';
 import { RecipesServiceApi, GetRecipeParams } from './recipes.contract';
 import { Recipe } from './recipes.type';
 
@@ -46,8 +47,10 @@ class RecipesService implements RecipesServiceApi {
 
 			return Promise.resolve(recipes[indexToUpdate]);
 		} else {
-			// Fix: error handler
-			return Promise.resolve(updatedRecipe);
+			throw cookErrorBuilder(
+				'NOT_FOUND',
+				`Cannot update recipe ID: ${updatedRecipe.id}. This record was not found`
+			);
 		}
 	};
 }

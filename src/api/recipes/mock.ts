@@ -9,31 +9,31 @@ export const recipes: Recipe[] = [
 			'Deep fried chicken breasts overflowing\n text test overflowing text test overflowing text test overflowing text testoverflowing text test overflowing text test overflowing text testoverflowing text test overflowing text test overflowing text testoverflowing text test overflowing text test overflowing text testoverflowing text test overflowing text test overflowing text testoverflowing text test overflowing text test overflowing text testoverflowing text test overflowing text test overflowing text testoverflowing text test overflowing text test overflowing text testoverflowing text test overflowing text test overflowing text testoverflowing text test overflowing text test overflowing text test',
 		ingredients: [
 			{
-				id: '1-1-1-1',
+				id: randomUUID(),
 				name: 'Oil',
 				amount: 1,
 				unit: 'l'
 			},
 			{
-				id: '1-1-1-2',
+				id: randomUUID(),
 				name: 'Chicken breast',
 				amount: 1,
 				unit: 'kg'
 			},
 			{
-				id: '1-1-1-3',
+				id: randomUUID(),
 				name: 'Egg',
 				amount: 1,
 				unit: 'unit'
 			},
 			{
-				id: '1-1-1-4',
+				id: randomUUID(),
 				name: 'Breadcrumbs',
 				amount: 1,
 				unit: 'unit'
 			},
 			{
-				id: '1-1-1-5',
+				id: randomUUID(),
 				name: 'Mustard',
 				amount: 60,
 				unit: 'g'
@@ -41,29 +41,29 @@ export const recipes: Recipe[] = [
 		],
 		steps: [
 			{
-				id: '1-1-1-1',
+				id: randomUUID(),
 				stepCount: 1,
 				description: 'Cut the chicken breast into small semi flat square pieces'
 			},
 			{
-				id: '1-1-1-2',
+				id: randomUUID(),
 				stepCount: 2,
 				description:
 					'Soak the cubes in a mix of mustard,mayo,salt,pepper and eggs for ~1h'
 			},
 			{
-				id: '1-1-1-3',
+				id: randomUUID(),
 				stepCount: 3,
 				description:
 					'Prepare a breadcrumbs mix: breadcrumbs, chicken soup powder, smoked paprika, garlic powder'
 			},
 			{
-				id: '1-1-1-4',
+				id: randomUUID(),
 				stepCount: 4,
 				description: 'Coat the soaked cubes with the breadcrumbs mix and cool for ~30mins'
 			},
 			{
-				id: '1-1-1-5',
+				id: randomUUID(),
 				stepCount: 5,
 				description: 'Deep fry until golden'
 			}
@@ -75,7 +75,7 @@ export const recipes: Recipe[] = [
 		description: 'Spaghetti with beef and tomato sauce overflowing text test',
 		ingredients: [
 			{
-				id: '1-2-1-1',
+				id: randomUUID(),
 				amount: 1,
 				name: 'Beaf',
 				unit: 'kg'
@@ -83,7 +83,7 @@ export const recipes: Recipe[] = [
 		],
 		steps: [
 			{
-				id: '1-1-1-1',
+				id: randomUUID(),
 				description: 'Make it',
 				stepCount: 1
 			}

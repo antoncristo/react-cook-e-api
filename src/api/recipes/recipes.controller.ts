@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express';
-import { recipesService } from './recipes.service';
 import { QueryBasicParams } from 'api/types';
+import { CookError } from 'errors';
+import { recipesService } from './recipes.service';
 import { Recipe } from './recipes.type';
 
 export const getRecipes: RequestHandler = async (req, res, next) => {
@@ -38,12 +39,12 @@ export const deleteRecipe: RequestHandler = async (req, res, next) => {
 
 export const putRecipe: RequestHandler = async (req, res, next) => {
 	try {
-		const updatedRecipe = req.body.updatedRecipe as Recipe;
+		const updatedRecipe = req.body.recipe as Recipe;
 
 		const success = await recipesService.putRecipe(updatedRecipe);
 
 		res.send({ updated: success });
 	} catch (err) {
-		return next(err);
+		res.status((err as CookError).statusCode).send((err as CookError).msg);
 	}
 };

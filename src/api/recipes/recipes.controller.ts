@@ -43,7 +43,7 @@ export const putRecipe: RequestHandler = async (req, res, next) => {
 
 		const success = await recipesService.putRecipe(updatedRecipe);
 
-		res.send({ updated: success });
+		res.send(success);
 	} catch (err) {
 		res.status((err as CookError).statusCode).send((err as CookError).msg);
 	}

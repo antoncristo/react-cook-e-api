@@ -19,7 +19,7 @@ export const recipeValidator = (recipe: Recipe | undefined, res: Response): bool
 		let _err: CookError;
 
 		if (err instanceof ZodError) {
-			_err = cookErrorBuilder('BAD_REQUEST', (err as ZodError).message);
+			_err = cookErrorBuilder('BAD_REQUEST', JSON.stringify((err as ZodError).format()));
 		} else {
 			_err = err as CookError;
 		}

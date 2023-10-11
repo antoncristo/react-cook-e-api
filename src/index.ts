@@ -3,6 +3,7 @@ import { config as envConfig } from 'dotenv';
 import cors from 'cors';
 
 import { appRouter } from 'api';
+import { cookErrorBuilder } from 'errors';
 
 const SERVER_PORT = process.env.PORT ? Number(process.env.PORT) : 3300;
 
@@ -17,7 +18,9 @@ app.use('/api', appRouter);
 
 // not found/bad request/error handling section
 app.use('*', (req, res) => {
-	res.send('Not Found').status(404);
+	const err = cookErrorBuilder('INTERNAL_ERROR', 'unknown server error');
+
+	res.status(err.statusCode).send(err.msg);
 });
 
 app.listen(SERVER_PORT, '0.0.0.0', () =>

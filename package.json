@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "node build/index.js",
 		"start:docker": "npm run build && npm start",
-		"dev": "nodemon ",
+		"dev": "nodemon",
 		"build": "tsc && tsc-alias",
 		"pretty": "prettier --write src/**/*.{ts,tsx,css}"
 	},
@@ -17,6 +17,7 @@
 		"cors": "^2.8.5",
 		"dotenv": "^16.3.1",
 		"express": "^4.18.2",
+		"firebase-admin": "^11.11.0",
 		"zod": "^3.22.4"
 	},
 	"devDependencies": {

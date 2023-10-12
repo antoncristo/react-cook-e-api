@@ -26,3 +26,5 @@ app.use('*', (req, res) => {
 app.listen(SERVER_PORT, '0.0.0.0', () =>
 	console.log('[Server][Connection]: listening on port', SERVER_PORT)
 );
+
+console.log('[test render env]:', process.env.FIREBASE_PROJECT_ID);

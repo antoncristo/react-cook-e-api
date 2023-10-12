@@ -1,13 +1,9 @@
 import express from 'express';
-import { config as envConfig } from 'dotenv';
 import cors from 'cors';
-
 import { appRouter } from 'api';
 import { cookErrorBuilder } from 'errors';
 
 const SERVER_PORT = process.env.PORT ? Number(process.env.PORT) : 3300;
-
-envConfig();
 
 const app = express();
 
@@ -26,5 +22,3 @@ app.use('*', (req, res) => {
 app.listen(SERVER_PORT, '0.0.0.0', () =>
 	console.log('[Server][Connection]: listening on port', SERVER_PORT)
 );
-
-console.log('[test firebase env]:', process.env.FIREBASE_PROJECT_ID);

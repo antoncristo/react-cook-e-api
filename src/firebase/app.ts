@@ -1,0 +1,12 @@
+import { initializeApp, AppOptions, cert } from 'firebase-admin/app';
+
+const options: AppOptions = {
+	credential: cert({
+		projectId: 'cooke-dev',
+		clientEmail: 'firebase-adminsdk-9oxz2@cooke-dev.iam.gserviceaccount.com',
+		privateKey:
+			'-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCL7IuMcfTGDcw9\nOMrFyampR5V5TgCrgFNxWcAsvXxxWCdmUrSxOqTSzWfy14qt52po87vsKpgAjW1M\nbYDQR6jvw1+OLU9HIQ9ANRHeY26kHtFpevPiyDi1Mdr7z7lYOVVe7ZzdSFSWvg/p\npP8YvF71bwiQcoUnCfbls5A6cFlLqz020ScimWeymOBFq5g2pBrGt+hadK+QC9UH\neNzMpacvh2EfzsIHIhBHAAS+mWVqlsDPPjQllud19QSYpxwAnLTFVSiU20x9CrTn\n357V2Wx7CS2PwpWEB74t96yVZ5TGWggYvtDVW98xvhMvYXNZpp9gqZ26QNluPgRH\ns3erIabhAgMBAAECggEAGU7m27eF4CfBPAaQaI9l7EwaDVeON/btQMiMwZrhTgf1\nkmSdsZurkcRcy5fwSa2cedCx+hCnLxxle0goHyQC+qDyIN9xoioo3cJrkbeW3MEF\nPAik4a040o8qrlafTcWK+zFLqNuLDzvf2XECQelaXJahbC0Gh+3dtiTRDrzg7dZN\n8NcLJYX6QppWdXaQ3UEJDmHxV8LpKYC94hW/KGw75QDOPA7pbpglfosAq9n/jWcA\nbnJQV90ANOK8qCfcHMMElfZKXzKhROS73pVvrKmcWYBCXdd19sampQxcd/TDlEuD\nSX62PDkkYp7VwiSF1Qjm2WGImJZ4DCnHIP/ZPTaMlQKBgQDBA1FWmq2vsCVeskVn\nnXs0qdd1TmXjxBjXun7s9q4TIMxchNPPAdM9ncg+okRyE/PhHiy+YKBQ/GR1Ytyz\n/2nQSS8fump3ND74AqHDhzZIjtgaLEVJvHeQSJYy2ZrPwcEAkm7aOc96yTw15v5s\nAFRUBBaiXWbm0/bHFeUuZvpiHQKBgQC5lhJWKzyNzYQV57YnnjXKbCLWc5oysJrJ\nR0Lfuf25/JtR5wCY1VykjF1tnzrvJp16bpgaUgY/ye6ZwylHjEAu3ojHDeT8RsKj\n2lLIlhPu8wTuC8jCLtBT/7IuclQt3Mx7O71RXPK1edmWNYLCjUh4cDPZgInKB9uF\nHagetXr8lQKBgE7eqDIXarnL5LlZZ3r7owjWDjDlJEV6MByXHJ5//onacSetL0/7\nkvIus1DExetHs/RdfDMfEOOG/xXom/8Bc5+lCBiS+EZVlxWJHcjkS45CsJOhW37S\nAJl4z8dfnB8hMVimfZ222c12xZ/REE3ZpJvgP8+BEzdnjgO0Mr5PXikRAoGAcXgm\nQfUxkunjJpmDr/l1ngw7yK7pyrBcE1C0vKG1Vm/yb0M0BD3/5MPFo+7FU89iXacc\n7IrWM049ylme9ZX08DMzobEHHpANFa25C9dm3KRNkVY3KzMAQTuHMArLGTd09qvx\n9rtD0l1sAgE5r8Y+VxUTPprupE3llCAr2IrRZXkCgYBxH2jUJWIWv+MbamjQU1y5\nXTcI3SUMRejOH1y8a+6BHUeVS/UeYzp5Vsi7+dLamU2hixit8+ml1UDpmYrNLGPb\ngFMoDRflYAt8YKQAOuTuhZ6dUqZeK2S32GLgYQ+Li62Gd8yTFSp0KRFhJe/C7Isq\nRDJNN742JSwpBYd1Yql4FQ==\n-----END PRIVATE KEY-----\n'
+	})
+};
+
+export const app = initializeApp(options);

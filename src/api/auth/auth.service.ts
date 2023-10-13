@@ -1,21 +1,33 @@
-import { Auth } from 'firebase-admin/auth';
 import { randomUUID } from 'crypto';
-import { auth } from 'firebase/auth';
+import { FirebaseAuthProvider, SignInParams, SignInResponse } from 'firebase/auth';
 import { AuthServiceApi } from './auth.contract';
+import { parseFirebaseUserToCookeUser } from 'firebase/utils';
+import { AxiosResponse } from 'axios';
 
 class AuthService implements AuthServiceApi {
-	private authProvider: Auth;
+	private authProvider = new FirebaseAuthProvider();
 
-	constructor(authProvider: Auth) {
-		this.authProvider = authProvider;
-	}
+	createUserWithEmailAndPassword = async (credentials: {
+		email: Email;
+		password: Password;
+		name: string;
+	}): Promise<CookEUser> =>
+		this.authProvider.admin
+			.createUser({
+				uid: randomUUID(),
+				email: credentials.email,
+				password: credentials.password,
+				displayName: credentials.name
+			})
+			.then(fbUser => parseFirebaseUserToCookeUser(fbUser));
 
-	login = async () => {
-		return this.authProvider.createUser({
-			email: 'test@gmail.com',
-			uid: randomUUID()
+	signInWithEmailAndPassword = async (
+		credentials: SignInParams
+	): Promise<AxiosResponse<SignInResponse>> =>
+		this.authProvider.client.signInWithEmailAndPAssword({
+			email: credentials.email,
+			password: credentials.password
 		});
-	};
 }
 
-export const authService = new AuthService(auth);
+export const authService = new AuthService();

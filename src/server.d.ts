@@ -12,3 +12,9 @@ declare interface Credentials {
 	email: Email;
 	password: Password;
 }
+
+declare interface CookEUser {
+	uuid: string;
+	name: string;
+	email: Email;
+}

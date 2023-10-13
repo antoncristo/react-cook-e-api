@@ -3,4 +3,5 @@ import * as authController from './auth.controller';
 
 export const authRouter = Router();
 
-authRouter.route('/').get(authController.testAuth);
+authRouter.route('/register').post(authController.registerNewUser);
+authRouter.route('/sign-in').post(authController.signInWithEmailAndPassword);

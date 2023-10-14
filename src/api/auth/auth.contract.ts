@@ -7,7 +7,5 @@ export interface AuthServiceApi {
 		password: Password;
 		name: string;
 	}) => Promise<CookEUser>;
-	signInWithEmailAndPassword: (
-		credentials: SignInParams
-	) => Promise<AxiosResponse<SignInResponse>>;
+	signInWithEmailAndPassword: (credentials: SignInParams) => Promise<SignInResponse>;
 }

@@ -30,7 +30,9 @@ export const signInWithEmailAndPassword: RequestHandler = async (req, res, next)
 			password
 		});
 
-		res.send(signInResponse.data);
+		const { idToken, ...user } = signInResponse;
+
+		res.send(user);
 	} catch (err) {
 		// Fix: add firebase error handling
 		const _err = cookErrorBuilder(

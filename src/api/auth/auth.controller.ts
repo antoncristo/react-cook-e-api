@@ -2,6 +2,7 @@ import { RequestHandler } from 'express';
 import { authService } from './auth.service';
 import { cookErrorBuilder } from 'errors';
 import { AxiosError } from 'axios';
+import { createToken } from 'utils/jwt';
 
 export const registerNewUser: RequestHandler = async (req, res, next) => {
 	try {
@@ -29,9 +30,14 @@ export const signInWithEmailAndPassword: RequestHandler = async (req, res, next)
 			email,
 			password
 		});
-
 		const { idToken, ...user } = signInResponse;
 
+		// const sessionToken = createToken(user);
+
+		// res.cookie('session', sessionToken, {
+		// 	httpOnly: true,
+		// 	maxAge: 3600000
+		// });
 		res.send(user);
 	} catch (err) {
 		// Fix: add firebase error handling

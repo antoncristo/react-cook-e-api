@@ -1,5 +1,4 @@
-import { AxiosResponse } from 'axios';
-import { SignInParams, SignInResponse } from 'firebase/auth';
+import { SignInParams } from 'firebase/auth';
 
 export interface AuthServiceApi {
 	createUserWithEmailAndPassword: (credentials: {
@@ -7,5 +6,5 @@ export interface AuthServiceApi {
 		password: Password;
 		name: string;
 	}) => Promise<CookEUser>;
-	signInWithEmailAndPassword: (credentials: SignInParams) => Promise<SignInResponse>;
+	signInWithEmailAndPassword: (credentials: SignInParams) => Promise<CookEUser>;
 }

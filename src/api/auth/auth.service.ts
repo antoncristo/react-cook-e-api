@@ -20,15 +20,21 @@ class AuthService implements AuthServiceApi {
 			})
 			.then(fbUser => parseFirebaseUserToCookeUser(fbUser));
 
-	signInWithEmailAndPassword = async (
-		credentials: SignInParams
-	): Promise<SignInResponse> =>
+	signInWithEmailAndPassword = async (credentials: SignInParams): Promise<CookEUser> =>
 		this.authProvider.client
 			.signInWithEmailAndPAssword({
 				email: credentials.email,
 				password: credentials.password
 			})
-			.then(response => response.data);
+			.then(response => {
+				const user: CookEUser = {
+					email: response.data.email,
+					name: response.data.email,
+					uuid: response.data.localId
+				};
+
+				return user;
+			});
 }
 
 export const authService = new AuthService();

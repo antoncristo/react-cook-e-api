@@ -30,15 +30,11 @@ export const signInWithEmailAndPassword: RequestHandler = async (req, res, next)
 			email,
 			password
 		});
-		const { idToken, ...user } = signInResponse;
+		const { ...user } = signInResponse;
 
-		// const sessionToken = createToken(user);
+		const accessToken = createToken(user);
 
-		// res.cookie('session', sessionToken, {
-		// 	httpOnly: true,
-		// 	maxAge: 3600000
-		// });
-		res.send(user);
+		res.send({ user, accessToken });
 	} catch (err) {
 		// Fix: add firebase error handling
 		const _err = cookErrorBuilder(

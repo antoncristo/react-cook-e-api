@@ -1,8 +1,7 @@
 import { RequestHandler } from 'express';
 import { authService } from './auth.service';
-import { cookErrorBuilder } from 'errors';
-import { AxiosError } from 'axios';
 import { createToken } from 'utils/jwt';
+import { errorHandler } from 'errors/error';
 
 export const registerNewUser: RequestHandler = async (req, res, next) => {
 	try {
@@ -17,7 +16,7 @@ export const registerNewUser: RequestHandler = async (req, res, next) => {
 		res.status(200).send();
 	} catch (err) {
 		// Fix: add firebase error handling
-		const _err = cookErrorBuilder('BAD_REQUEST', JSON.stringify(err));
+		const _err = errorHandler('BAD_REQUEST', err);
 		res.status(_err.statusCode).send(_err.msg);
 	}
 };
@@ -37,10 +36,7 @@ export const signInWithEmailAndPassword: RequestHandler = async (req, res, next)
 		res.send({ user, accessToken });
 	} catch (err) {
 		// Fix: add firebase error handling
-		const _err = cookErrorBuilder(
-			'BAD_REQUEST',
-			JSON.stringify((err as AxiosError).response?.data)
-		);
+		const _err = errorHandler('BAD_REQUEST', err);
 		res.status(_err.statusCode).send(_err.msg);
 	}
 };

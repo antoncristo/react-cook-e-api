@@ -33,7 +33,7 @@ export const signInWithEmailAndPassword: RequestHandler = async (req, res, next)
 
 		const accessToken = createToken(user);
 
-		res.send({ user, accessToken });
+		res.send({ accessToken });
 	} catch (err) {
 		// Fix: add firebase error handling
 		const _err = errorHandler('BAD_REQUEST', err);

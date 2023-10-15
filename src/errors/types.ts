@@ -1,5 +1,5 @@
-export type ErrorType = 'BAD_REQUEST' | 'INTERNAL_ERROR' | 'NOT_FOUND';
-export type ErrorCode = 400 | 404 | 500;
+export type ErrorType = 'BAD_REQUEST' | 'UNAUTHORIZED' | 'NOT_FOUND' | 'INTERNAL_ERROR';
+export type ErrorCode = 400 | 401 | 404 | 500;
 
 export class CookError {
 	statusCode: ErrorCode;
@@ -13,6 +13,7 @@ export class CookError {
 
 export const typeToCodeMap: Record<ErrorType, ErrorCode> = {
 	BAD_REQUEST: 400,
+	UNAUTHORIZED: 401,
 	NOT_FOUND: 404,
 	INTERNAL_ERROR: 500
 };

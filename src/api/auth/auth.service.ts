@@ -1,21 +1,55 @@
-import { Auth } from 'firebase-admin/auth';
 import { randomUUID } from 'crypto';
-import { auth } from 'firebase/auth';
+import { FirebaseAuthProvider, SignInParams, SignInResponse } from 'firebase/auth';
 import { AuthServiceApi } from './auth.contract';
+import { parseFirebaseUserToCookeUser } from 'firebase/utils';
+import { verifyToken } from 'utils/jwt';
 
 class AuthService implements AuthServiceApi {
-	private authProvider: Auth;
+	private authProvider = new FirebaseAuthProvider();
 
-	constructor(authProvider: Auth) {
-		this.authProvider = authProvider;
-	}
+	createUserWithEmailAndPassword = async (credentials: {
+		email: Email;
+		password: Password;
+		name: string;
+	}): Promise<CookEUser> =>
+		this.authProvider.admin
+			.createUser({
+				uid: randomUUID(),
+				email: credentials.email,
+				password: credentials.password,
+				displayName: credentials.name
+			})
+			.then(fbUser => parseFirebaseUserToCookeUser(fbUser));
 
-	login = async () => {
-		return this.authProvider.createUser({
-			email: 'test@gmail.com',
-			uid: randomUUID()
-		});
+	signInWithEmailAndPassword = async (credentials: SignInParams): Promise<CookEUser> =>
+		this.authProvider.client
+			.signInWithEmailAndPAssword({
+				email: credentials.email,
+				password: credentials.password
+			})
+			.then(response => {
+				const user: CookEUser = {
+					email: response.data.email,
+					name: response.data.email,
+					uuid: response.data.localId
+				};
+
+				return user;
+			});
+
+	getUserFromBearer = async (bearerToken: string): Promise<CookEUser> => {
+		try {
+			const decoded = verifyToken(bearerToken) as CookEUser;
+
+			return Promise.resolve({
+				email: decoded.email,
+				name: decoded.name,
+				uuid: decoded.uuid
+			});
+		} catch (err) {
+			throw err;
+		}
 	};
 }
 
-export const authService = new AuthService(auth);
+export const authService = new AuthService();

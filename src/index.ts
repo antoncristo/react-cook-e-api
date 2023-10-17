@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import { appRouter } from 'api';
 import { cookErrorBuilder } from 'errors';
 
@@ -8,6 +9,7 @@ const SERVER_PORT = process.env.PORT ? Number(process.env.PORT) : 3300;
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
 
 app.use('/api', appRouter);

@@ -7,4 +7,5 @@ export interface AuthServiceApi {
 		name: string;
 	}) => Promise<CookEUser>;
 	signInWithEmailAndPassword: (credentials: SignInParams) => Promise<CookEUser>;
+	getUserFromBearer: (bearerToken: string) => Promise<CookEUser>;
 }

@@ -2,7 +2,9 @@ import { errorHandler } from 'errors/error';
 import { RequestHandler } from 'express';
 import { verifyToken } from 'utils/jwt';
 
-const extractTokenFromAuthHeader = (authHeader: string | undefined): string | null => {
+export const extractTokenFromAuthHeader = (
+	authHeader: string | undefined
+): string | null => {
 	return authHeader ? authHeader.split(' ')[1] : null;
 };
 

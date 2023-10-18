@@ -1,7 +1,6 @@
 import { randomUUID } from 'crypto';
-import { FirebaseAuthProvider, SignInParams, SignInResponse } from 'firebase/auth';
+import { FirebaseAuthProvider, SignInParams } from 'firebase/auth';
 import { AuthServiceApi } from './auth.contract';
-import { parseFirebaseUserToCookeUser } from 'firebase/utils';
 import { verifyToken } from 'utils/jwt';
 
 class AuthService implements AuthServiceApi {
@@ -11,31 +10,10 @@ class AuthService implements AuthServiceApi {
 		email: Email;
 		password: Password;
 		name: string;
-	}): Promise<CookEUser> =>
-		this.authProvider.admin
-			.createUser({
-				uid: randomUUID(),
-				email: credentials.email,
-				password: credentials.password,
-				displayName: credentials.name
-			})
-			.then(fbUser => parseFirebaseUserToCookeUser(fbUser));
+	}): Promise<CookEUser> => this.authProvider.createUser(credentials);
 
 	signInWithEmailAndPassword = async (credentials: SignInParams): Promise<CookEUser> =>
-		this.authProvider.client
-			.signInWithEmailAndPAssword({
-				email: credentials.email,
-				password: credentials.password
-			})
-			.then(response => {
-				const user: CookEUser = {
-					email: response.data.email,
-					name: response.data.email,
-					uuid: response.data.localId
-				};
-
-				return user;
-			});
+		this.authProvider.signIn(credentials);
 
 	getUserFromBearer = async (bearerToken: string): Promise<CookEUser> => {
 		try {

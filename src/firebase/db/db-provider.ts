@@ -27,6 +27,18 @@ export class FirebaseDatabaseProvider {
 			.then(arr => arr);
 	}
 
+	async getRecipe(recipeID: UUID, userID: UUID): Promise<Recipe | undefined> {
+		return this.admin
+			.collection('users')
+			.doc(userID)
+			.collection('recipes')
+			.doc(recipeID)
+			.get()
+			.then(snapshot => {
+				return snapshot.data() as Recipe;
+			});
+	}
+
 	async deleteRecipe(recipeID: string, userID: string) {
 		return this.admin
 			.collection('users')

@@ -5,5 +5,5 @@ export interface QueryBasicParams {
 }
 
 export interface AuthenticatedRequest extends Request {
-	user: CookEUser | undefined;
+	user: CookEUser;
 }

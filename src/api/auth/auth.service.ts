@@ -1,7 +1,5 @@
-import { randomUUID } from 'crypto';
 import { FirebaseAuthProvider, SignInParams } from 'firebase/auth';
 import { AuthServiceApi } from './auth.contract';
-import { verifyToken } from 'utils/jwt';
 
 class AuthService implements AuthServiceApi {
 	private authProvider = new FirebaseAuthProvider();

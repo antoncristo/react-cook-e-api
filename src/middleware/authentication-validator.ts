@@ -1,12 +1,6 @@
 import { errorHandler } from 'errors/error';
 import { RequestHandler } from 'express';
-import { verifyToken } from 'utils/jwt';
-
-export const extractTokenFromAuthHeader = (
-	authHeader: string | undefined
-): string | null => {
-	return authHeader ? authHeader.split(' ')[1] : null;
-};
+import { extractTokenFromAuthHeader, verifyToken } from 'utils/jwt';
 
 export const authenticationCheck: RequestHandler = (req, res, next) => {
 	const accessToken = extractTokenFromAuthHeader(req.headers.authorization);

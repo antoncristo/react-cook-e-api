@@ -1,8 +1,7 @@
 import { RequestHandler } from 'express';
 import { authService } from './auth.service';
-import { createToken } from 'utils/jwt';
-import { cookErrorBuilder, errorHandler } from 'errors/error';
-import { extractTokenFromAuthHeader } from 'middleware';
+import { createToken, extractTokenFromAuthHeader, getUserFromBearer } from 'utils/jwt';
+import { errorHandler } from 'errors/error';
 import { userSchema } from 'middleware/schema-validator/user/user-schema';
 
 export const registerNewUser: RequestHandler = async (req, res, next) => {
@@ -44,11 +43,10 @@ export const signInWithEmailAndPassword: RequestHandler = async (req, res, next)
 };
 
 export const getUserFromToken: RequestHandler = async (req, res, next) => {
-	const authHeader = req.headers.authorization;
-	const bearer = extractTokenFromAuthHeader(authHeader);
-
 	try {
-		const user = await authService.getUserFromBearer(bearer!);
+		const user = await getUserFromBearer(
+			extractTokenFromAuthHeader(req.headers.authorization)!
+		);
 
 		userSchema.parse(user);
 

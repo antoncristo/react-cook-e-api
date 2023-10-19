@@ -24,6 +24,12 @@ class RecipesService implements RecipesServiceApi {
 		return Promise.resolve(res);
 	};
 
+	getRecipe = async (recipeID: UUID, userID: UUID): Promise<Recipe | undefined> => {
+		const recipe = await this.dbProvider.getRecipe(recipeID, userID);
+
+		return Promise.resolve(recipe);
+	};
+
 	postRecipe = async (recipePayload: Recipe, userID: UUID): Promise<Recipe> => {
 		await this.dbProvider.addRecipe(recipePayload, userID);
 

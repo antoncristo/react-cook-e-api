@@ -4,14 +4,14 @@ import { z } from 'zod';
 export const recipeSchema = z.object({
 	id: z.string().uuid(),
 	title: z.string().min(1),
-	description: z.string().min(6),
+	description: z.string().min(1),
 	ingredients: z
 		.array(
 			z.object({
 				id: z.string().uuid(),
-				name: z.string().min(6),
+				name: z.string().min(1),
 				amount: z.coerce.number().gte(1),
-				unit: z.string()
+				unit: z.string().min(1)
 			})
 		)
 		.min(1),
@@ -20,7 +20,7 @@ export const recipeSchema = z.object({
 			z.object({
 				id: z.string().uuid(),
 				stepCount: z.coerce.number().gte(1),
-				description: z.string().min(6)
+				description: z.string().min(1)
 			})
 		)
 		.min(1)

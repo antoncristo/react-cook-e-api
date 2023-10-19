@@ -10,3 +10,9 @@ export const createToken = (data: AbstractObject) => {
 export const verifyToken = (token: string) => {
 	return jwt.verify(token, envConfig.firebase.jwtSecret);
 };
+
+export const extractTokenFromAuthHeader = (
+	authHeader: string | undefined
+): string | null => {
+	return authHeader ? authHeader.split(' ')[1] : null;
+};

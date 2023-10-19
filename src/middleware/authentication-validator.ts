@@ -1,18 +1,18 @@
+import { AuthenticatedRequest } from 'api/types';
 import { errorHandler } from 'errors/error';
 import { RequestHandler } from 'express';
-import { verifyToken } from 'utils/jwt';
-
-export const extractTokenFromAuthHeader = (
-	authHeader: string | undefined
-): string | null => {
-	return authHeader ? authHeader.split(' ')[1] : null;
-};
+import { extractTokenFromAuthHeader, verifyToken } from 'utils/jwt';
 
 export const authenticationCheck: RequestHandler = (req, res, next) => {
 	const accessToken = extractTokenFromAuthHeader(req.headers.authorization);
 	try {
 		if (accessToken) {
-			verifyToken(accessToken);
+			const decoded = verifyToken(accessToken) as CookEUser;
+			(req as AuthenticatedRequest).user = {
+				email: decoded.email,
+				name: decoded.name,
+				uuid: decoded.uuid
+			};
 		} else {
 			throw Error();
 		}

@@ -14,20 +14,6 @@ class AuthService implements AuthServiceApi {
 
 	signInWithEmailAndPassword = async (credentials: SignInParams): Promise<CookEUser> =>
 		this.authProvider.signIn(credentials);
-
-	getUserFromBearer = async (bearerToken: string): Promise<CookEUser> => {
-		try {
-			const decoded = verifyToken(bearerToken) as CookEUser;
-
-			return Promise.resolve({
-				email: decoded.email,
-				name: decoded.name,
-				uuid: decoded.uuid
-			});
-		} catch (err) {
-			throw err;
-		}
-	};
 }
 
 export const authService = new AuthService();

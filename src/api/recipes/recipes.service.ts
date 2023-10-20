@@ -1,16 +1,12 @@
-import { cookErrorBuilder } from 'errors';
 import { RecipesServiceApi, GetRecipeParams } from './recipes.contract';
 import { Recipe } from './recipes.type';
 import { FirebaseDatabaseProvider } from 'firebase/db';
-
-const UNDEFINED_INDEX = -1;
-let recipes: Recipe[] = [];
 
 class RecipesService implements RecipesServiceApi {
 	private dbProvider = new FirebaseDatabaseProvider();
 
 	getRecipes = async (params: GetRecipeParams, userID: UUID): Promise<Recipe[]> => {
-		const dbRecipes = await this.dbProvider.getRecipes(userID);
+		const dbRecipes = await this.dbProvider.recipes.getRecipes(userID);
 		let res: Recipe[] = dbRecipes;
 
 		if (params.search) {
@@ -25,25 +21,25 @@ class RecipesService implements RecipesServiceApi {
 	};
 
 	getRecipe = async (recipeID: UUID, userID: UUID): Promise<Recipe | undefined> => {
-		const recipe = await this.dbProvider.getRecipe(recipeID, userID);
+		const recipe = await this.dbProvider.recipes.getRecipe(recipeID, userID);
 
 		return Promise.resolve(recipe);
 	};
 
 	postRecipe = async (recipePayload: Recipe, userID: UUID): Promise<Recipe> => {
-		await this.dbProvider.addRecipe(recipePayload, userID);
+		await this.dbProvider.recipes.addRecipe(recipePayload, userID);
 
 		return Promise.resolve(recipePayload);
 	};
 
 	deleteRecipe = async (recipeToDelete: UUID, userID: UUID): Promise<UUID> => {
-		await this.dbProvider.deleteRecipe(recipeToDelete, userID);
+		await this.dbProvider.recipes.deleteRecipe(recipeToDelete, userID);
 
 		return Promise.resolve(recipeToDelete);
 	};
 
 	putRecipe = async (updatedRecipe: Recipe, userID: UUID): Promise<Recipe> => {
-		await this.dbProvider.updateRecipe(updatedRecipe, userID);
+		await this.dbProvider.recipes.updateRecipe(updatedRecipe, userID);
 
 		return Promise.resolve(updatedRecipe);
 	};

@@ -14,6 +14,14 @@ export class PreferencesDal {
 			.then(() => preferences);
 	}
 
+	async updatePreferences(userID: UUID, preferences: Preferences) {
+		return this.admin
+			.collection(ROOT_COLLECTION)
+			.doc(userID)
+			.update({ preferences })
+			.then(() => preferences);
+	}
+
 	async getPreferences(userID: UUID): Promise<Preferences> {
 		return this.admin
 			.collection(ROOT_COLLECTION)

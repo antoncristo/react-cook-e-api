@@ -18,7 +18,7 @@ export class PreferencesDal {
 		return this.admin
 			.collection(ROOT_COLLECTION)
 			.doc(userID)
-			.update({ preferences })
+			.update({ ...preferences })
 			.then(() => preferences);
 	}
 

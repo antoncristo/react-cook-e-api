@@ -3,6 +3,7 @@ import { AuthenticatedRequest, QueryBasicParams } from 'api/types';
 import { CookError } from 'errors';
 import { recipesService } from './recipes.service';
 import { Recipe } from './recipes.type';
+import { errorHandler } from 'errors/error';
 
 export const getRecipes: RequestHandler = async (req, res, next) => {
 	try {
@@ -12,6 +13,27 @@ export const getRecipes: RequestHandler = async (req, res, next) => {
 		const recipes = await recipesService.getRecipes(queryParams, user.uuid);
 
 		res.send(recipes);
+	} catch (err) {
+		return next(err);
+	}
+};
+
+export const getRecipe: RequestHandler = async (req, res, next) => {
+	try {
+		const recipeId = req.params.recipeid;
+		const user = (req as AuthenticatedRequest).user;
+
+		const recipe = await recipesService.getRecipe(recipeId, user.uuid);
+
+		if (!recipe) {
+			const err = errorHandler(
+				'NOT_FOUND',
+				`recipe with id ${recipeId} could not be found`
+			);
+			res.status(err.statusCode).send(err.msg);
+		}
+
+		res.send(recipe);
 	} catch (err) {
 		return next(err);
 	}

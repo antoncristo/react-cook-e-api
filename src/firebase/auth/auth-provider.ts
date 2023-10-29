@@ -27,7 +27,7 @@ export class FirebaseAuthProvider {
 			.then(response => {
 				const user: CookEUser = {
 					email: response.data.email,
-					name: response.data.email,
+					name: response.data.displayName,
 					uuid: response.data.localId
 				};
 

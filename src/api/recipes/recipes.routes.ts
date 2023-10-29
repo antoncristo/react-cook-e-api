@@ -5,6 +5,7 @@ import { schemaValidator } from 'middleware';
 export const recipesRouter = Router();
 
 recipesRouter.route('/').get(recipesController.getRecipes);
+recipesRouter.route('/:recipeid').get(recipesController.getRecipe);
 recipesRouter.route('/').post(schemaValidator('RECIPE'), recipesController.postRecipe);
 recipesRouter.route('/').put(schemaValidator('RECIPE'), recipesController.putRecipe);
 recipesRouter.route('/:recipeid').delete(recipesController.deleteRecipe);
